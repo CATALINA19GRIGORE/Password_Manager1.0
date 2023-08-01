@@ -1,5 +1,5 @@
 import sys
-from libs import libraries
+from libs import function_module as fm
 
 
 
@@ -8,9 +8,9 @@ while True:
     try:
         if option == 's':
             app = input('Enter App Name: ')
-            option_1 = libraries.menu()
+            option_1 = fm.menu()
             if option_1 == 'r':
-                password = libraries.random_pass()
+                password = fm.random_pass_generator()
             else:
                 password = input('Type your password:')
             libraries.save_password('./passwords.csv', app, password)
