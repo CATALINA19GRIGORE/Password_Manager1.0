@@ -3,11 +3,11 @@ from libs import function_module as fm
 
 
 
-option = libraries.init_menu()
+option = fm.init_menu()
 while True:
     try:
         if option == 's':
-            app = input('Enter App Name: ')
+            app = input('Enter App Name: ').lower()
             option_1 = fm.menu()
             if option_1 == 'r':
                 password = fm.random_pass_generator()
@@ -16,8 +16,12 @@ while True:
             libraries.save_password('./passwords.csv', app, password)
             print(f'For the app: {app} \npassword: {password} has been alocated')
             break
-
-        else:
+        elif option == 'g':
+            print('Type the account for which you want to get the password')
+            user_account = input("Account: ").lower()
+            print(f'For {user_account} the password is: {fm.get_password(user_account)}')
+            option = fm.init_menu()
+        elif option == 'e':
             sys.exit()
     except Exception as e:
         print(e)
