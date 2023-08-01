@@ -30,14 +30,16 @@ def save_password(path_to_file:str, app:str, passwd:str) -> None:
 
 def random_pass():
     """
-    Generates a string with random characters from a string containing letters, digits, punctuation and character space
+    Generates a string with random characters from a string containing 6 letters, 4 digits and 2 punctuation characters
     :return: a string of 12 random characters
     """
-    characters = string.ascii_letters + string.digits + string.punctuation + ' '
-    password = ''.join(random.choice(characters) for i in range(12))
+    pass_letters = ''.join(random.choice(string.ascii_letters) for i in range(6))
+    pass_digits = ''.join(random.choice(string.digits) for i in range(4))
+    pass_punctuation = ''.join(random.choice(string.punctuation) for i in range(2))
+    password = ''.join(set(pass_letters + pass_digits + pass_punctuation))
     return password
 
 
 if __name__ == '__main__':
-    # save_password('D:\Gabriel\Curs_Python\Password Manager\passwords.csv', 'test_app', 'test_pass')
+    print(random_pass())
     pass
