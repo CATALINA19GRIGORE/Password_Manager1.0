@@ -2,7 +2,6 @@ import sys
 from libs import function_module as fm
 
 
-
 option = fm.init_menu()
 while True:
     try:
@@ -13,8 +12,8 @@ while True:
                 password = fm.random_pass_generator()
             else:
                 password = input('Type your password:')
-            libraries.save_password('./passwords.csv', app, password)
-            print(f'For the app: {app} \npassword: {password} has been alocated')
+            fm.save_password('./passwords.csv', app, password)
+            print(f'For the app: {app} \npassword: {password} has been allocated')
             break
         elif option == 'g':
             print('Type the account for which you want to get the password')

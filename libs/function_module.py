@@ -1,6 +1,17 @@
+"""This module is used to generate passwords and save them to database(csv file)
+
+
+Functions:
+
+
+init_menu(): Prompts user for input
+menu(): Prompts user for input
+get_password():  Finds a password based on the app given
+save_password(): Saves data(password) to database(csv file)
+random_pass_generator(): Generates a string of 12 random characters
 """
-This module is used to save passwords and put them into a file
-"""
+
+
 from libs import read_write
 import string
 import random
@@ -21,13 +32,16 @@ def get_password(user_account):
     Finds a password based on the account given
     :param user_account: Account in the database
     """
-    file = read_write.read_file('D:\Gabriel\Curs_Python\Password Manager\passwords.csv')
-    for row in file:
-        if row[0] == user_account:
-            return row[1]
+    try:
+        file = read_write.read_file('D:\Gabriel\Curs_Py thon\Password Manager\passwords.csv')
+        for row in file:
+            if row[0] == user_account:
+                return row[1]
 
-    else:
-        print(f'This account doesnt exist in the file')
+        else:
+            print(f'This account doesnt exist in the file')
+    except FileNotFoundError as e:
+        print(f'An error has occurred!: {e}')
 
 
 def save_password(path_to_file: str, app: str, passwd: str) -> None:
@@ -39,8 +53,11 @@ def save_password(path_to_file: str, app: str, passwd: str) -> None:
     :param passwd: String used as password
     :return: None
     """
-    lst_app_pass = [app, passwd]
-    read_write.append_to_file(path_to_file, lst_app_pass)
+    try:
+        lst_app_pass = [app, passwd]
+        read_write.append_to_file(path_to_file, lst_app_pass)
+    except Exception as e:
+        print(e)
 
 
 def random_pass_generator():
@@ -48,12 +65,27 @@ def random_pass_generator():
     Generates a string with random characters from a string containing 6 letters, 4 digits and 2 punctuation characters
     :return: a string of 12 random characters
     """
-    pass_letters = ''.join(random.choice(string.ascii_letters) for _ in range(6))
-    pass_digits = ''.join(random.choice(string.digits) for _ in range(4))
-    pass_punctuation = ''.join(random.choice(string.punctuation) for _ in range(2))
-    password = ''.join(set(pass_letters + pass_digits + pass_punctuation))
-    return password
+    try:
+        inc_l = 0
+        inc_d = 0
+        inc_p = 0
+        password = ''
+        characters = string.ascii_letters + string.digits + string.punctuation
+        while len(password) < 12:
+            char = random.choice(characters)
+            if char.isdigit() and inc_d < 4:
+                password += char
+                inc_d += 1
+            elif char.isalpha() and inc_l < 6:
+                password += char
+                inc_l += 1
+            elif char in string.punctuation and inc_p < 2:
+                password += char
+                inc_p += 1
+        return password
+    except Exception as e:
+        print(e)
 
 
-# if __name__ == '__main__':
-#     print(random_pass())
+if __name__ == '__main__':
+    print(random_pass_generator())
