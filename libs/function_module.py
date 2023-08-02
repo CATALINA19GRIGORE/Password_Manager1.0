@@ -60,31 +60,18 @@ def save_password(path_to_file: str, app: str, passwd: str) -> None:
         print(e)
 
 
-def random_pass_generator():
+def random_pass_generator() -> str:
     """
     Generates a string with random characters from a string containing 6 letters, 4 digits and 2 punctuation characters
     :return: a string of 12 random characters
     """
     try:
-        inc_l = 0
-        inc_d = 0
-        inc_p = 0
-        password = ''
-        characters = string.ascii_letters + string.digits + string.punctuation
-        while len(password) < 12:
-            char = random.choice(characters)
-            if char.isdigit() and inc_d < 4:
-                password += char
-                inc_d += 1
-            elif char.isalpha() and inc_l < 6:
-                password += char
-                inc_l += 1
-            elif char in string.punctuation and inc_p < 2:
-                password += char
-                inc_p += 1
-        return password
+        password = random.sample(string.ascii_letters, 6) + random.sample(string.digits, 4) \
+                   + random.sample(string.punctuation, 2)
+        random.shuffle(password)
+        return ''.join(password)
     except Exception as e:
-        print(e)
+        print(f'Unexpected error: {e}')
 
 
 if __name__ == '__main__':
