@@ -15,6 +15,8 @@ random_pass_generator(): Generates a string of 12 random characters
 from libs import read_write
 import string
 import random
+# pathlib module to work with paths
+from pathlib import Path
 
 
 def init_menu():
@@ -33,7 +35,7 @@ def get_password(user_account):
     :param user_account: Account in the database
     """
     try:
-        file = read_write.read_file('D:\Gabriel\Curs_Py thon\Password Manager\passwords.csv')
+        file = read_write.read_file(fr'{Path(__file__).parent.parent}\\passwords.csv')
         for row in file:
             if row[0] == user_account:
                 return row[1]
