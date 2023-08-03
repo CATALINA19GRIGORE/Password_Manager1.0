@@ -18,22 +18,30 @@ import random
 
 
 def init_menu():
+    """
+    Promts user for input
+    :return: User input
+    """
     print(f'Save password [s]\nGet Password [g]\nExit [e]')
     return input('Your choice: ')
 
 
 def menu():
+    """
+    Prompts user for input
+    :return: User input
+    """
     print(f'Random generated password [r]\nManually generated password [m]')
     return input('Choose wisely: ')
 
 
 def get_password(user_account):
     """
-    Finds a password based on the account given
+    Finds a password in the database based on the account given
     :param user_account: Account in the database
     """
     try:
-        file = read_write.read_file('D:\Gabriel\Curs_Py thon\Password Manager\passwords.csv')
+        file = read_write.read_file('D:\Gabriel\Curs_Python\Password Manager\passwords.csv')
         for row in file:
             if row[0] == user_account:
                 return row[1]

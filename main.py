@@ -14,7 +14,7 @@ while True:
                 password = input('Type your password:')
             fm.save_password('./passwords.csv', app, password)
             print(f'For the app: {app} \npassword: {password} has been allocated')
-            break
+            option = fm.init_menu()
         elif option == 'g':
             print('Type the account for which you want to get the password')
             user_account = input("Account: ").lower()
@@ -22,5 +22,8 @@ while True:
             option = fm.init_menu()
         elif option == 'e':
             sys.exit()
+        else:
+            print("Not a valid option")
+            option = fm.init_menu()
     except Exception as e:
         print(e)
