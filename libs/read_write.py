@@ -35,11 +35,14 @@ def append_to_file(path_to_file, lst):
             writer = csv.writer(file_a)
             writer.writerow(lst)
 
+    except FileNotFoundError as e:
+        with open('userdata.csv', 'w', newline='') as file_w:
+            writer = csv.writer(file_w)
+            writer.writerow(['App', 'Username', 'Password', 'Email'])
 
-    except Exception as e:
-        print(f'Something went wrong: {e}')
 
 
 if __name__ == '__main__':
-    result = read_file("D:\Gabriel\Curs_Python\Password Manager\passwords.csv")
-    print(result)
+    # result = read_file("D:\Gabriel\Curs_Python\Password Manager\passwords.csv")
+    # print(result)
+    pass
