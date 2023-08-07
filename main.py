@@ -24,7 +24,7 @@ while True:
         elif option == 'g':
             print('Type the app for which you want to get the user data')
             app_name = input("App: ").lower()
-            print(f'For {app_name} the acount details are: \n{fm.get_password(app_name)}')
+            print(f'For {app_name} the acount details are: \n{fm.get_userdata(app_name)}')
             option = fm.init_menu()
         elif option == 'e':
             sys.exit()

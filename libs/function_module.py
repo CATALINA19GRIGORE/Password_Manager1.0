@@ -37,7 +37,7 @@ def menu():
     return input('Choose wisely: ')
 
 
-def get_password(app_name):
+def get_userdata(app_name):
     """
     Finds a password in the database based on the account given
     :param app_name: Application saved in database(input)
