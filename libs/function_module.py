@@ -37,16 +37,16 @@ def menu():
     return input('Choose wisely: ')
 
 
-def get_password(user_account):
+def get_password(app_name):
     """
     Finds a password in the database based on the account given
-    :param user_account: Account in the database
+    :param app_name: Application saved in database(input)
     """
     try:
-        file = read_write.read_file(fr'{Path(__file__).parent.parent}\\passwords.csv')
+        file = read_write.read_file(fr'{Path(__file__).parent.parent}\\userdata.csv')
         for row in file:
-            if row[0] == user_account:
-                return row[1]
+            if row[0] == app_name:
+                return f'Password:{row[1]}\nUsername:{row[2]}\nEmail:{row[3]}'
 
         else:
             print(f'This account doesnt exist in the file')
@@ -54,17 +54,20 @@ def get_password(user_account):
         print(f'An error has occurred!: {e}')
 
 
-def save_password(path_to_file: str, app: str, passwd: str) -> None:
+def save_account(path_to_file: str, app: str, username: str,  passwd: str, email: str) -> None:
     """
+
     Saves data to database(csv file)
 
     :param path_to_file:The path to the file where we want to save the data
     :param app: String used to name an app
+    :param username: String used as username
     :param passwd: String used as password
+    :param email: String used for email address
     :return: None
     """
     try:
-        lst_app_pass = [app, passwd]
+        lst_app_pass = [app, username, passwd, email]
         read_write.append_to_file(path_to_file, lst_app_pass)
     except Exception as e:
         print(e)
@@ -86,3 +89,4 @@ def random_pass_generator() -> str:
 
 if __name__ == '__main__':
     print(random_pass_generator())
+    save_account()
