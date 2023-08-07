@@ -22,17 +22,15 @@ while True:
             print(f'For the app: {app} \npassword: {password} has been allocated')
             option = fm.init_menu()
         elif option == 'g':
-            print('Type the account for which you want to get the password')
+            print('Type the app for which you want to get the user data')
             app_name = input("App: ").lower()
-            print(f'For {app_name} the acount details are: {fm.get_password(app_name)}')
+            print(f'For {app_name} the acount details are: \n{fm.get_password(app_name)}')
             option = fm.init_menu()
         elif option == 'e':
             sys.exit()
         else:
             print("Not a valid option")
             option = fm.init_menu()
-    except FileNotFoundError as e:
-        with open('userdata.csv', 'w', newline='') as file_w:
-            writer = csv.writer(file_w)
-            writer.writerow(['App', 'Username', 'Password', 'Email'])
+    except Exception as e:
+        print(e)
         option = fm.init_menu()

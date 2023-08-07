@@ -17,8 +17,9 @@ def read_file(path_to_file):
             return list(content)
 
     except FileNotFoundError as e:
-        print(f'Fisierul nu a fost gasit sau nu se poate deschide. '
-              f'Eroarea: {e}')
+        with open('userdata.csv', 'w', newline='') as file_w:
+            writer = csv.writer(file_w)
+            writer.writerow(['App', 'Username', 'Password', 'Email'])
     except Exception as e:
         print(e)
 
