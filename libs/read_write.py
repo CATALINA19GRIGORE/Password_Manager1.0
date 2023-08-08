@@ -18,11 +18,11 @@ def read_file(path_to_file):
 
     except FileNotFoundError as e:
         print('File has been created, now you can register new data')
-        with open('userdata.csv', 'w', newline='') as file_w:
+        with open('userdata.csv', 'w') as file_w:
             writer = csv.writer(file_w)
             writer.writerow(['App', 'Username', 'Password', 'Email'])
     except Exception as e:
-        print(e)
+        print(f'read_file problem:{e}')
 
 
 def append_to_file(path_to_file, lst):
@@ -39,13 +39,11 @@ def append_to_file(path_to_file, lst):
 
     except FileNotFoundError as e:
         print('File userdata.csv created')
-        with open('userdata.csv', 'w', newline='') as file_w:
+        with open('userdata.csv', 'w') as file_w:
             writer = csv.writer(file_w)
             writer.writerow(['App', 'Username', 'Password', 'Email'])
 
 
 
 if __name__ == '__main__':
-    # result = read_file("D:\Gabriel\Curs_Python\Password Manager\passwords.csv")
-    # print(result)
     pass

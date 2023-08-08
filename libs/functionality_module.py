@@ -46,7 +46,7 @@ def get_userdata(app_name):
         file = read_write.read_file(fr'{Path(__file__).parent.parent}\\userdata.csv')
         for row in file:
             if row[0] == app_name:
-                return f'Password:{row[1]}\nUsername:{row[2]}\nEmail:{row[3]}'
+                return f'Username:{row[1]}\nPassword:{row[2]}\nEmail:{row[3]}'
 
         else:
             print(f'This account doesnt exist in the file')
@@ -65,7 +65,7 @@ def save_account(path_to_file: str, account: list) -> None:
     try:
         read_write.append_to_file(path_to_file, account)
     except Exception as e:
-        print(e)
+        print(f'something happened in save_account: {e}')
 
 
 def random_pass_generator() -> str:
@@ -99,11 +99,11 @@ def create_userdata(option: str) -> list:
         username = input('Type your username: ')
         email = input("Type your email address: ")
 
-    return [app, password, username, email]
+    return [app, username, password, email]
 
 
 if __name__ == '__main__':
     print(random_pass_generator())
-    save_account()
+
 
 

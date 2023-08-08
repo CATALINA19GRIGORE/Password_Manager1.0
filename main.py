@@ -1,8 +1,5 @@
-import csv
 import sys
 from libs import functionality_module as fm
-
-
 
 option = fm.init_menu()
 while True:
