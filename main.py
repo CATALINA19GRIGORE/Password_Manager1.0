@@ -1,6 +1,6 @@
 import csv
 import sys
-from libs import function_module as fm
+from libs import functionality_module as fm
 
 
 
@@ -8,18 +8,13 @@ option = fm.init_menu()
 while True:
     try:
         if option == 's':
-            app = input('Enter App Name: ').lower()
             option_1 = fm.menu()
             if option_1 == 'r':
-                password = fm.random_pass_generator()
-                username = input('Type your username: ')
-                email = input("Type your email address: ")
+                account = fm.create_userdata('r')
             else:
-                password = input('Type your password:')
-                username = input('Type your username: ')
-                email = input("Type your email address: ")
-            fm.save_account('./userdata.csv', app, password, username, email)
-            print(f'For the app: {app} \npassword: {password} has been allocated')
+                account = fm.create_userdata('m')
+            fm.save_account('./userdata.csv', account)
+            print(f'For the app: {account[0]} account info was stored in userdata')
             option = fm.init_menu()
         elif option == 'g':
             print('Type the app for which you want to get the user data')

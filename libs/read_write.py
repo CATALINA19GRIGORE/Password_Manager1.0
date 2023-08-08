@@ -17,6 +17,7 @@ def read_file(path_to_file):
             return list(content)
 
     except FileNotFoundError as e:
+        print('File has been created, now you can register new data')
         with open('userdata.csv', 'w', newline='') as file_w:
             writer = csv.writer(file_w)
             writer.writerow(['App', 'Username', 'Password', 'Email'])
@@ -37,6 +38,7 @@ def append_to_file(path_to_file, lst):
             writer.writerow(lst)
 
     except FileNotFoundError as e:
+        print('File userdata.csv created')
         with open('userdata.csv', 'w', newline='') as file_w:
             writer = csv.writer(file_w)
             writer.writerow(['App', 'Username', 'Password', 'Email'])

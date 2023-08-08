@@ -54,21 +54,16 @@ def get_userdata(app_name):
         print(f'An error has occurred!: {e}')
 
 
-def save_account(path_to_file: str, app: str, username: str,  passwd: str, email: str) -> None:
+def save_account(path_to_file: str, account: list) -> None:
     """
-
     Saves data to database(csv file)
-
     :param path_to_file:The path to the file where we want to save the data
-    :param app: String used to name an app
-    :param username: String used as username
-    :param passwd: String used as password
-    :param email: String used for email address
+    :param account: A list that will be saved in the database(csv file)
+
     :return: None
     """
     try:
-        lst_app_pass = [app, username, passwd, email]
-        read_write.append_to_file(path_to_file, lst_app_pass)
+        read_write.append_to_file(path_to_file, account)
     except Exception as e:
         print(e)
 
@@ -87,6 +82,28 @@ def random_pass_generator() -> str:
         print(f'Unexpected error: {e}')
 
 
+def create_userdata(option: str) -> list:
+    """
+    Prompts user for input
+    :param option: A string used for condition
+    :return: Return a list of user input
+    """
+    if option == 'r':
+        app = input('Enter App Name: ').lower()
+        password = random_pass_generator()
+        username = input('Type your username: ')
+        email = input("Type your email address: ")
+    else:
+        app = input('Enter App Name: ').lower()
+        password = input("Type the password")
+        username = input('Type your username: ')
+        email = input("Type your email address: ")
+
+    return [app, password, username, email]
+
+
 if __name__ == '__main__':
     print(random_pass_generator())
     save_account()
+
+
