@@ -11,7 +11,7 @@ save_password(): Saves data(password) to database(csv file)
 random_pass_generator(): Generates a string of 12 random characters
 """
 
-
+import os
 from libs import read_write
 import string
 import random
@@ -24,6 +24,8 @@ def init_menu():
     Promts user for input
     :return: User input
     """
+    if not os.path.exists(fr'{Path(__file__).parent.parent}\\userdata.csv'):
+        read_write.create_file()
     print(f'Save password [s]\nGet Password [g]\nExit [e]')
     return input('Your choice: ')
 
@@ -43,29 +45,27 @@ def get_userdata(app_name):
     :param app_name: Application saved in database(input)
     """
     try:
-        file = read_write.read_file(fr'{Path(__file__).parent.parent}\\userdata.csv')
-        for row in file:
-            if row[0] == app_name:
-                return f'Username:{row[1]}\nPassword:{row[2]}\nEmail:{row[3]}'
+        file = read_write.read_file(fr'{Path(__file__).parent.parent}\\userdata.csv', app_name)
+        return f'Username:{file[1]}\nPassword:{file[2]}\nEmail:{file[3]}'
 
-        else:
-            print(f'This account doesnt exist in the file')
     except FileNotFoundError as e:
-        print(f'An error has occurred!: {e}')
+        read_write.create_file()
+        print('userdata.csv created, please try again!')
 
 
-def save_account(path_to_file: str, account: list) -> None:
+def save_account(account: list) -> None:
     """
     Saves data to database(csv file)
-    :param path_to_file:The path to the file where we want to save the data
+
     :param account: A list that will be saved in the database(csv file)
 
     :return: None
     """
     try:
-        read_write.append_to_file(path_to_file, account)
-    except Exception as e:
-        print(f'something happened in save_account: {e}')
+        read_write.append_to_file(fr'{Path(__file__).parent.parent}\\userdata.csv', account)
+    except FileNotFoundError as e:
+        read_write.create_file()
+        print('userdata.csv created, please try again!')
 
 
 def random_pass_generator() -> str:
@@ -99,11 +99,12 @@ def create_userdata(option: str) -> list:
         username = input('Type your username: ')
         email = input("Type your email address: ")
 
+        print()
     return [app, username, password, email]
 
 
 if __name__ == '__main__':
     print(random_pass_generator())
-
+    print(os.path.exists(fr'{Path(__file__).parent.parent}\\userdata.csv'))
 
 
